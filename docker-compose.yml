@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongo1:
+    image: mongo:5
+    container_name: mongo1
+    ports:
+      - "27017:27017"
+    command: mongod --replSet myReplicaSet --bind_ip_all
+    networks:
+      - mongoCluster
+
+  mongo2:
+    image: mongo:5
+    container_name: mongo2
+    ports:
+      - "27018:27017"
+    command: mongod --replSet myReplicaSet --bind_ip_all
+    networks:
+      - mongoCluster
+
+  mongo3:
+    image: mongo:5
+    container_name: mongo3
+    ports:
+      - "27019:27017"
+    command: mongod --replSet myReplicaSet --bind_ip_all
+    networks:
+      - mongoCluster
+
+networks:
+  mongoCluster:
+    driver: bridge
